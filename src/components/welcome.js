@@ -1,8 +1,6 @@
 import React from 'react';
 
 const Welcome = () =>
-  <div className="ui centered grid">
-    <h1>Welcome to MoonMail open project</h1>
-  </div>;
+  <h1 className="ui centered align header">Welcome to MoonMail open project</h1>;
 
 export default Welcome;
