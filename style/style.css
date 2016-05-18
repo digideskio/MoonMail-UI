@@ -1,3 +1,11 @@
 .main.container {
-  margin-top: 7em;
+  margin-top: 6em;
+}
+
+.ui.menu .header.item {
+  border-left: none !important;
+}
+
+.ui.form .field > label {
+  text-transform: capitalize;
 }

@@ -1,8 +1,7 @@
 import localStorage from 'store';
-import {
-  SAVE_SETTINGS,
-  LOAD_SETTINGS
-} from './types'
+import axios from 'axios';
+import cuid from 'cuid';
+import { SAVE_SETTINGS, LOAD_SETTINGS, SHOW_MESSAGE, CLEAN_MESSAGE, FETCH_LISTS } from './types';
 
 
 export function saveSettings(settings) {
@@ -21,4 +20,73 @@ export function loadSettings() {
   }
 }
 
+export function showMessage({text, style, delay = 3000}) {
+  return function (dispatch) {
+    setTimeout(() => {
+      dispatch(cleanMessage())
+    }, delay);
+    dispatch({
+      type: SHOW_MESSAGE,
+      payload: {text, style}
+    })
+  }
+}
 
+export function cleanMessage() {
+  return {
+    type: CLEAN_MESSAGE
+  }
+}
+
+export function fetchLists() {
+  const {baseUrl} = localStorage.get('settings');
+  return function (dispatch) {
+    axios.get(`${baseUrl}/lists`)
+      .then((res) => {
+        dispatch({
+          type: FETCH_LISTS,
+          payload: res.data.items
+        })
+      })
+      .catch((err) => {
+        dispatch(showMessage({
+          text: err,
+          style: 'error'
+        }))
+      })
+  }
+}
+
+export function sendCampaign({subject, body, listIds}) {
+  const {baseUrl, apiKey, apiSecret, region, emailAddress} = localStorage.get('settings');
+  const data = {
+    campaign: {
+      id: cuid(),
+      subject,
+      body,
+      listIds,
+      precompiled: false
+    },
+    sender: {
+      apiKey,
+      apiSecret,
+      region,
+      emailAddress
+    }
+  };
+  return function (dispatch) {
+    axios.post(`${baseUrl}/campaigns/test`, data)
+      .then((res) => {
+        dispatch(showMessage({
+          text: 'Campaign have been sent!',
+          style: 'success'
+        }))
+      })
+      .catch((err) => {
+        dispatch(showMessage({
+          text: err,
+          style: 'error'
+        }))
+      })
+  }
+}
