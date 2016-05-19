@@ -41,6 +41,13 @@ export function cleanMessage() {
 export function fetchLists() {
   const {baseUrl} = localStorage.get('settings');
   return function (dispatch) {
+    if (!baseUrl) {
+      dispatch(showMessage({
+        text: 'Please provide all settings before sending a campaign',
+        style: 'error'
+      }));
+      return;
+    }
     axios.get(`${baseUrl}/lists`)
       .then((res) => {
         dispatch({
@@ -75,6 +82,13 @@ export function sendCampaign({subject, body, listIds}) {
     }
   };
   return function (dispatch) {
+    if (!baseUrl) {
+      dispatch(showMessage({
+        text: 'Please provide all settings before sending a campaign',
+        style: 'error'
+      }));
+      return;
+    }
     axios.post(`${baseUrl}/campaigns/test`, data)
       .then((res) => {
         dispatch(showMessage({

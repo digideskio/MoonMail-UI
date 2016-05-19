@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import * as actions from './../actions';
 import Input from './shared/input';
 import Select from './shared/select';
@@ -10,7 +9,7 @@ const fields = ['subject', 'listIds', 'body'];
 class Campaign extends Component {
   submit(formProps) {
     this.props.sendCampaign(formProps);
-    this.props.reset();
+    this.props.resetForm();
   }
 
   componentWillMount() {
@@ -18,18 +17,16 @@ class Campaign extends Component {
   }
 
   render() {
-    const {handleSubmit, invalid, lists} = this.props;
+    const {fields: {subject, listIds, body}, handleSubmit, invalid, lists} = this.props;
     return (
       <section>
         <h1 className="ui centered align header">Campaign</h1>
         <form className="ui form" onSubmit={handleSubmit(this.submit.bind(this))}>
-          <Field name="subject" component={Input} type="text"/>
-          <Field name="listIds" label="Lists" defaultValue={[]} component={(props) =>
-            <Select {...props} multiple>
-              {lists.map((list, i) => <option key={i} value={list.id}>{list.listName}</option>)}
-            </Select>
-          }/>
-          <Field name="body" component={Input} inputTag="textarea"/>
+          <Input type="text" {...subject}/>
+          <Select multiple {...listIds}>
+            {lists.map((list, i) => <option key={i} value={list.id}>{list.listName}</option>)}
+          </Select>
+          <Input component="textarea" {...body}/>
           <button className="ui button primary" type="submit" disabled={invalid}>
             <i className="send icon"/>
             Send
@@ -48,18 +45,17 @@ function mapStateToProps(state) {
 
 function validate(values) {
   const errors = {};
-  fields.forEach((field) => {
-    const val = values[field];
-    if (!val || val.length === 0) errors[field] = `${field} is required`;
+  Object.keys(values).forEach((key) => {
+    const val = values[key];
+    if (!val || val.length === 0) errors[key] = `${key} is required`;
   });
   return errors;
 }
 
 Campaign = reduxForm({
   form: 'campaign',
+  fields: ['subject', 'listIds', 'body'],
   validate
-})(Campaign);
-
-Campaign = connect(mapStateToProps, actions)(Campaign);
+}, mapStateToProps, actions)(Campaign);
 
 export default Campaign;
