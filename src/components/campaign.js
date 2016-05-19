@@ -47,7 +47,7 @@ function validate(values) {
   const errors = {};
   Object.keys(values).forEach((key) => {
     const val = values[key];
-    if (!val || val.length === 0) errors[key] = `${key} is required`;
+    if (!val || val.length === 0) errors[key] = `this field is required`;
   });
   return errors;
 }
