@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { Router, Route, IndexRoute, useRouterHistory } from 'react-router';
+import withScroll from 'scroll-behavior';
 import { createHashHistory } from 'history';
 import { syncHistoryWithStore } from 'react-router-redux'
 import { loadSettings } from './actions';
@@ -19,7 +20,7 @@ const store = createStore(reducers, {}, compose(
   applyMiddleware(thunk),
   window.devToolsExtension ? window.devToolsExtension() : f => f
 ));
-const history = syncHistoryWithStore(appHistory, store);
+const history = syncHistoryWithStore(withScroll(appHistory), store);
 store.dispatch(loadSettings());
 
 ReactDOM.render(
