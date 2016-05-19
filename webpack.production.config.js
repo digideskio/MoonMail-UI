@@ -13,7 +13,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development ')
+      'process.env.NODE_ENV': JSON.stringify('production')
     })
   ],
   module: {
@@ -30,11 +30,5 @@ module.exports = {
   },
   postcss() {
     return [precss, autoprefixer];
-  },
-  devtool: 'source-map',
-  devServer: {
-    historyApiFallback: true,
-    inline: true,
-    contentBase: 'public'
   }
 };

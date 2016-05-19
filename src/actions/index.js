@@ -13,7 +13,7 @@ export function saveSettings(settings) {
 }
 
 export function loadSettings() {
-  const settings = localStorage.get('settings');
+  const settings = localStorage.get('settings') || {};
   return {
     type: LOAD_SETTINGS,
     payload: settings
@@ -39,7 +39,7 @@ export function cleanMessage() {
 }
 
 export function fetchLists() {
-  const {baseUrl} = localStorage.get('settings');
+  const {baseUrl} = localStorage.get('settings') || {};
   return function (dispatch) {
     if (!baseUrl) {
       dispatch(showMessage({
@@ -65,7 +65,7 @@ export function fetchLists() {
 }
 
 export function sendCampaign({subject, body, listIds}) {
-  const {baseUrl, apiKey, apiSecret, region, emailAddress} = localStorage.get('settings');
+  const {baseUrl, apiKey, apiSecret, region, emailAddress} = localStorage.get('settings') || {};
   const data = {
     campaign: {
       id: cuid(),

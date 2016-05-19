@@ -1,3 +1,4 @@
+import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -16,7 +17,7 @@ import reducers from './reducers';
 const appHistory = useRouterHistory(createHashHistory)({queryKey: false});
 const store = createStore(reducers, {}, compose(
   applyMiddleware(thunk),
-  window.devToolsExtension ? window.devToolsExtension() : undefined
+  window.devToolsExtension ? window.devToolsExtension() : f => f
 ));
 const history = syncHistoryWithStore(appHistory, store);
 store.dispatch(loadSettings());
