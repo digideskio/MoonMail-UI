@@ -23,7 +23,7 @@ class Campaign extends Component {
         <h1 className="ui centered align header">Campaign</h1>
         <form className="ui form" onSubmit={handleSubmit(this.submit.bind(this))}>
           <Input type="text" {...subject}/>
-          <Select multiple {...listIds}>
+          <Select multiple label="Lists" {...listIds}>
             {lists.map((list, i) => <option key={i} value={list.id}>{list.listName}</option>)}
           </Select>
           <Input component="textarea" {...body}/>
