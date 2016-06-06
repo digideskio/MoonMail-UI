@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import { reduxForm } from 'redux-form';
+import React, {Component} from 'react';
+import {reduxForm} from 'redux-form';
 import * as actions from './../actions';
 import Input from './shared/input';
 
 class Settings extends Component {
+
   submit(formProps) {
     this.props.saveSettings(formProps);
     this.props.showMessage({
@@ -16,32 +17,30 @@ class Settings extends Component {
     const {fields, handleSubmit, invalid} = this.props;
     return (
       <section>
-        <h1 className="ui centered align header">Settings</h1>
-        <form className="ui form" onSubmit={handleSubmit(this.submit.bind(this))}>
+        <h1 className="ui centered align header" >Settings</h1>
+        <form className="ui form" onSubmit={handleSubmit(this.submit.bind(this))} >
           {Object.keys(fields).map(key =>
             <Input key={key} type="text" {...fields[key]}/>
           )}
-          <button className="ui button primary" type="submit" disabled={invalid}>Save</button>
+          <button className="ui button primary" type="submit" disabled={invalid} >Save</button>
         </form>
       </section>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    initialValues: state.settings
-  }
-}
+const mapStateToProps = (state) => ({
+  initialValues: state.settings
+});
 
-function validate(values) {
+const validate = (values) => {
   const errors = {};
   Object.keys(values).forEach((key) => {
     const val = values[key];
     if (!val || val.length === 0) errors[key] = `this field is required`;
   });
   return errors;
-}
+};
 
 Settings = reduxForm({
   form: 'settings',

@@ -1,14 +1,14 @@
 import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
-import { Router, Route, IndexRoute, useRouterHistory } from 'react-router';
+import {Router, Route, IndexRoute, useRouterHistory} from 'react-router';
 import withScroll from 'scroll-behavior';
-import { createHashHistory } from 'history';
-import { syncHistoryWithStore } from 'react-router-redux'
-import { loadSettings } from './actions';
+import {createHashHistory} from 'history';
+import {syncHistoryWithStore} from 'react-router-redux'
+import {loadSettings} from './actions';
 import App from './components/app';
 import Welcome from './components/welcome';
 import Campaign from './components/campaign';
@@ -24,12 +24,12 @@ const history = syncHistoryWithStore(withScroll(appHistory), store);
 store.dispatch(loadSettings());
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router history={history}>
-      <Route path="/" component={App}>
-        <Route path="settings" component={Settings}/>
-        <Route path="campaign" component={Campaign}/>
-        <IndexRoute component={Welcome}/>
+  <Provider store={store} >
+    <Router history={history} >
+      <Route path="/" component={App} >
+        <Route path="settings" component={Settings} />
+        <Route path="campaign" component={Campaign} />
+        <IndexRoute component={Welcome} />
       </Route>
     </Router>
   </Provider>

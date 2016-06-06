@@ -1,13 +1,12 @@
-import {
-  FETCH_LISTS
-} from './../actions/types'
+import * as types from './../actions/types';
 
 function listsReducer(state = [], action) {
   switch (action.type) {
-    case FETCH_LISTS:
+    case types.FETCH_LISTS:
       return action.payload;
+    default:
+      return state;
   }
-  return state;
 }
 
 export default listsReducer;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import cx from 'classnames';
 
 class Select extends Component {
@@ -12,15 +12,16 @@ class Select extends Component {
   }
 
   render() {
-    let { multiple, value } = this.props;
+    let {multiple, value, dirty, invalid, label, name, error} = this.props;
     if (multiple) value = value || [];
     return (
-      <div className={cx('field', {error: this.props.dirty && this.props.invalid})}>
+      <div className={cx('field', {error: dirty && invalid})} >
         <div>
-          <label>{this.props.label || this.props.name}</label>
-          <select ref="select" className="ui fluid dropdown" {...this.props} value={value}/>
+          <label>{label || name}</label>
+          <select ref="select" className="ui fluid dropdown" {...this.props} value={value} />
         </div>
-        {this.props.dirty && this.props.invalid && <div className="ui basic red pointing prompt label">{this.props.error}</div>}
+        {dirty && invalid &&
+        <div className="ui basic red pointing prompt label" >{error}</div>}
       </div>
     );
   }

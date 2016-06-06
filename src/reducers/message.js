@@ -1,16 +1,14 @@
-import {
-  SHOW_MESSAGE,
-  CLEAN_MESSAGE
-} from './../actions/types'
+import * as types from './../actions/types';
 
 function messageReducer(state = {}, action) {
   switch (action.type) {
-    case SHOW_MESSAGE:
+    case types.SHOW_MESSAGE:
       return action.payload;
-    case CLEAN_MESSAGE:
-      return {}
+    case types.CLEAN_MESSAGE:
+      return {};
+    default:
+      return state
   }
-  return state;
 }
 
 export default messageReducer;

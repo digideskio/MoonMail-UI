@@ -1,16 +1,14 @@
-import {
-  SAVE_SETTINGS,
-  LOAD_SETTINGS
-} from './../actions/types'
+import * as types from './../actions/types';
 
 function settingsReducer(state = {}, action) {
   switch (action.type) {
-    case SAVE_SETTINGS:
+    case types.SAVE_SETTINGS:
       return action.payload;
-    case LOAD_SETTINGS:
+    case types.LOAD_SETTINGS:
       return action.payload;
+    default:
+      return state;
   }
-  return state;
 }
 
 export default settingsReducer;

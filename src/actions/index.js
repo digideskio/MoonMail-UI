@@ -1,57 +1,59 @@
-import localStorage from 'store';
+import storage from 'store';
 import axios from 'axios';
 import cuid from 'cuid';
-import { SAVE_SETTINGS, LOAD_SETTINGS, SHOW_MESSAGE, CLEAN_MESSAGE, FETCH_LISTS } from './types';
+import * as types from './types';
 
-
-export function saveSettings(settings) {
-  localStorage.set('settings', settings);
+export const saveSettings = (settings) => {
+  storage.set('settings', settings);
   return {
-    type: SAVE_SETTINGS,
+    type: types.SAVE_SETTINGS,
     payload: settings
   }
-}
+};
 
-export function loadSettings() {
-  const settings = localStorage.get('settings') || {};
+export const loadSettings = () => {
+  const settings = storage.get('settings') || {};
   return {
-    type: LOAD_SETTINGS,
+    type: types.LOAD_SETTINGS,
     payload: settings
   }
-}
+};
 
-export function showMessage({text, style, delay = 3000}) {
+export const showMessage = ({text, style, delay = 3000}) => {
   return function (dispatch) {
     setTimeout(() => {
       dispatch(cleanMessage())
     }, delay);
     dispatch({
-      type: SHOW_MESSAGE,
+      type: types.SHOW_MESSAGE,
       payload: {text, style}
     })
   }
+};
+
+export const cleanMessage = () => ({
+  type: types.CLEAN_MESSAGE
+});
+
+function noSettingsError(dispatch) {
+  const error = 'Please provide all settings before sending a campaign';
+  dispatch(showMessage({
+    text: error,
+    style: 'error'
+  }));
+  return Promise.reject({error});
 }
 
-export function cleanMessage() {
-  return {
-    type: CLEAN_MESSAGE
-  }
-}
-
-export function fetchLists() {
-  const {baseUrl} = localStorage.get('settings') || {};
+export const fetchLists = () => {
+  const {baseUrl} = storage.get('settings') || {};
   return function (dispatch) {
     if (!baseUrl) {
-      dispatch(showMessage({
-        text: 'Please provide all settings before sending a campaign',
-        style: 'error'
-      }));
-      return;
+      return noSettingsError(dispatch);
     }
-    axios.get(`${baseUrl}/lists`)
+    return axios.get(`${baseUrl}/lists`)
       .then((res) => {
         dispatch({
-          type: FETCH_LISTS,
+          type: types.FETCH_LISTS,
           payload: res.data.items
         })
       })
@@ -62,10 +64,10 @@ export function fetchLists() {
         }))
       })
   }
-}
+};
 
-export function sendCampaign({subject, body, listIds}) {
-  const {baseUrl, apiKey, apiSecret, region, emailAddress} = localStorage.get('settings') || {};
+export const sendCampaign = ({subject, body, listIds}) => {
+  const {baseUrl, apiKey, apiSecret, region, emailAddress} = storage.get('settings') || {};
   const data = {
     campaign: {
       id: cuid(),
@@ -83,14 +85,10 @@ export function sendCampaign({subject, body, listIds}) {
   };
   return function (dispatch) {
     if (!baseUrl) {
-      dispatch(showMessage({
-        text: 'Please provide all settings before sending a campaign',
-        style: 'error'
-      }));
-      return;
+      return noSettingsError(dispatch);
     }
-    axios.post(`${baseUrl}/campaigns/test`, data)
-      .then((res) => {
+    return axios.post(`${baseUrl}/campaigns/test`, data)
+      .then(() => {
         dispatch(showMessage({
           text: 'Campaign have been sent!',
           style: 'success'
@@ -103,4 +101,4 @@ export function sendCampaign({subject, body, listIds}) {
         }))
       })
   }
-}
+};
