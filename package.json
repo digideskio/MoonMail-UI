@@ -5,12 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "serve": "babel-node lib/server",
+    "start:prod": "babel-node lib/server",
     "lint": "eslint src test;exit 0;",
-    "lint:fix": "eslint --fix src test;exit 0;",
+    "lint:fix": "eslint --fix src;exit 0;",
     "build": "NODE_ENV=production babel-node ./node_modules/webpack/bin/webpack.js",
-    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
-    "test:watch": "npm run test -- --watch"
+    "deploy": "git subtree push --prefix public origin gh-pages"
   },
   "author": "Dmitriy Nevzorov",
   "license": "ISC",
