@@ -20,8 +20,7 @@ class Select extends Component {
           <label>{label || name}</label>
           <select ref="select" className="ui fluid dropdown" {...this.props} value={value} />
         </div>
-        {dirty && invalid &&
-        <div className="ui basic red pointing prompt label" >{error}</div>}
+        {dirty && invalid && <div className="ui basic red pointing prompt label" >{error}</div>}
       </div>
     );
   }

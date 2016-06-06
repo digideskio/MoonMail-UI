@@ -69,19 +69,8 @@ export const fetchLists = () => {
 export const sendCampaign = ({subject, body, listIds}) => {
   const {baseUrl, apiKey, apiSecret, region, emailAddress} = storage.get('settings') || {};
   const data = {
-    campaign: {
-      id: cuid(),
-      subject,
-      body,
-      listIds,
-      precompiled: false
-    },
-    sender: {
-      apiKey,
-      apiSecret,
-      region,
-      emailAddress
-    }
+    campaign: {id: cuid(), subject, body, listIds, precompiled: false},
+    sender: {apiKey, apiSecret, region, emailAddress}
   };
   return function(dispatch) {
     if (!baseUrl) {
