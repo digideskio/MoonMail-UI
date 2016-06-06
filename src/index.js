@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import {Router, Route, IndexRoute, useRouterHistory} from 'react-router';
 import withScroll from 'scroll-behavior';
 import {createHashHistory} from 'history';
-import {syncHistoryWithStore} from 'react-router-redux'
+import {syncHistoryWithStore} from 'react-router-redux';
 import {loadSettings} from './actions';
 import App from './components/app';
 import Welcome from './components/welcome';

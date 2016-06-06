@@ -1,8 +1,10 @@
-const webpack = require('webpack');
-const precss = require('precss');
-const autoprefixer = require('autoprefixer');
+import webpack from 'webpack';
+import precss from 'precss';
+import autoprefixer from 'autoprefixer';
 
-module.exports = {
+const env = process.env.NODE_ENV || 'development';
+
+const webpackConfig = {
   entry: [
     './src/index.js'
   ],
@@ -13,7 +15,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development ')
+      'process.env.NODE_ENV': JSON.stringify(env)
     })
   ],
   module: {
@@ -22,7 +24,7 @@ module.exports = {
       loader: 'babel'
     }, {
       test: /\.css$/,
-      loader: "style-loader!css-loader!postcss-loader"
+      loader: 'style-loader!css-loader!postcss-loader'
     }]
   },
   resolve: {
@@ -30,11 +32,30 @@ module.exports = {
   },
   postcss() {
     return [precss, autoprefixer];
-  },
-  devtool: 'source-map',
-  devServer: {
+  }
+};
+
+if (env === 'development') {
+  webpackConfig.devtool = 'source-map';
+  webpackConfig.devServer = {
     historyApiFallback: true,
     inline: true,
     contentBase: 'public'
-  }
-};
+  };
+}
+
+if (env === 'production') {
+  webpackConfig.plugins.push(
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        unused: true,
+        dead_code: true,
+        warnings: false
+      }
+    })
+  );
+}
+
+export default webpackConfig;

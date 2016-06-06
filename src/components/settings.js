@@ -10,7 +10,7 @@ class Settings extends Component {
     this.props.showMessage({
       text: 'Settings have been saved to localStorage',
       style: 'positive'
-    })
+    });
   }
 
   render() {
@@ -20,7 +20,7 @@ class Settings extends Component {
         <h1 className="ui centered align header" >Settings</h1>
         <form className="ui form" onSubmit={handleSubmit(this.submit.bind(this))} >
           {Object.keys(fields).map(key =>
-            <Input key={key} type="text" {...fields[key]}/>
+            <Input key={key} type="text" {...fields[key]} />
           )}
           <button className="ui button primary" type="submit" disabled={invalid} >Save</button>
         </form>
@@ -37,7 +37,7 @@ const validate = (values) => {
   const errors = {};
   Object.keys(values).forEach((key) => {
     const val = values[key];
-    if (!val || val.length === 0) errors[key] = `this field is required`;
+    if (!val || val.length === 0) errors[key] = 'this field is required';
   });
   return errors;
 };

@@ -7,7 +7,7 @@ function messageReducer(state = {}, action) {
     case types.CLEAN_MESSAGE:
       return {};
     default:
-      return state
+      return state;
   }
 }
 

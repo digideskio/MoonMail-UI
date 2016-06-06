@@ -27,11 +27,11 @@ class Campaign extends Component {
       <section>
         <h1 className="ui centered align header" >Campaign</h1>
         <form className="ui form" onSubmit={handleSubmit(this.submit.bind(this))} >
-          <Input type="text" {...subject}/>
+          <Input type="text" {...subject} />
           <Select multiple label="Lists" {...listIds}>
             {lists.map((list, i) => <option key={i} value={list.id} >{list.name}</option>)}
           </Select>
-          <Input component="textarea" {...body}/>
+          <Input component="textarea" {...body} />
           <button className="ui button primary" type="submit" disabled={invalid} >
             <i className="send icon" />
             Send
@@ -50,7 +50,7 @@ const validate = (values) => {
   const errors = {};
   Object.keys(values).forEach((key) => {
     const val = values[key];
-    if (!val || val.length === 0) errors[key] = `this field is required`;
+    if (!val || val.length === 0) errors[key] = 'this field is required';
   });
   return errors;
 };

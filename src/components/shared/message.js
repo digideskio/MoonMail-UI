@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
 import cx from 'classnames';
 import * as actions from './../../actions';
 

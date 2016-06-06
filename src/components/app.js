@@ -4,9 +4,9 @@ import Message from './shared/message';
 
 const App = ({children}) => (
   <div>
-    <Header/>
+    <Header />
     <section className="ui main text container" >
-      <Message/>
+      <Message />
       {children}
     </section>
   </div>

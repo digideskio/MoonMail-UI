@@ -25,7 +25,7 @@ function renderComponent(ComponentClass, props = {}, state = {}) {
   return $(ReactDOM.findDOMNode(componentInstance));
 }
 
-$.fn.simulate = function (eventName, value) {
+$.fn.simulate = function(eventName, value) {
   if (value) {
     this.val(value);
   }

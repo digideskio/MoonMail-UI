@@ -8,7 +8,7 @@ export const saveSettings = (settings) => {
   return {
     type: types.SAVE_SETTINGS,
     payload: settings
-  }
+  };
 };
 
 export const loadSettings = () => {
@@ -16,19 +16,19 @@ export const loadSettings = () => {
   return {
     type: types.LOAD_SETTINGS,
     payload: settings
-  }
+  };
 };
 
 export const showMessage = ({text, style, delay = 3000}) => {
-  return function (dispatch) {
+  return function(dispatch) {
     setTimeout(() => {
-      dispatch(cleanMessage())
+      dispatch(cleanMessage());
     }, delay);
     dispatch({
       type: types.SHOW_MESSAGE,
       payload: {text, style}
-    })
-  }
+    });
+  };
 };
 
 export const cleanMessage = () => ({
@@ -46,7 +46,7 @@ function noSettingsError(dispatch) {
 
 export const fetchLists = () => {
   const {baseUrl} = storage.get('settings') || {};
-  return function (dispatch) {
+  return function(dispatch) {
     if (!baseUrl) {
       return noSettingsError(dispatch);
     }
@@ -55,15 +55,15 @@ export const fetchLists = () => {
         dispatch({
           type: types.FETCH_LISTS,
           payload: res.data.items
-        })
+        });
       })
       .catch((err) => {
         dispatch(showMessage({
           text: err,
           style: 'error'
-        }))
-      })
-  }
+        }));
+      });
+  };
 };
 
 export const sendCampaign = ({subject, body, listIds}) => {
@@ -83,7 +83,7 @@ export const sendCampaign = ({subject, body, listIds}) => {
       emailAddress
     }
   };
-  return function (dispatch) {
+  return function(dispatch) {
     if (!baseUrl) {
       return noSettingsError(dispatch);
     }
@@ -92,13 +92,13 @@ export const sendCampaign = ({subject, body, listIds}) => {
         dispatch(showMessage({
           text: 'Campaign have been sent!',
           style: 'success'
-        }))
+        }));
       })
       .catch((err) => {
         dispatch(showMessage({
           text: err,
           style: 'error'
-        }))
-      })
-  }
+        }));
+      });
+  };
 };

@@ -19,5 +19,4 @@ const Welcome = () => (
   </article>
 );
 
-
 export default Welcome;
