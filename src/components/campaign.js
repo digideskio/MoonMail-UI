@@ -4,8 +4,6 @@ import * as actions from './../actions';
 import Input from './shared/input';
 import Select from './shared/select';
 
-const fields = ['subject', 'listIds', 'body'];
-
 class Campaign extends Component {
   submit(formProps) {
     this.props.sendCampaign(formProps);
@@ -24,7 +22,7 @@ class Campaign extends Component {
         <form className="ui form" onSubmit={handleSubmit(this.submit.bind(this))}>
           <Input type="text" {...subject}/>
           <Select multiple label="Lists" {...listIds}>
-            {lists.map((list, i) => <option key={i} value={list.id}>{list.listName}</option>)}
+            {lists.map((list, i) => <option key={i} value={list.id}>{list.name}</option>)}
           </Select>
           <Input component="textarea" {...body}/>
           <button className="ui button primary" type="submit" disabled={invalid}>
