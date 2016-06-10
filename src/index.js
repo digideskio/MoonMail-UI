@@ -8,7 +8,7 @@ import {Router, Route, IndexRoute, useRouterHistory} from 'react-router';
 import withScroll from 'scroll-behavior';
 import {createHashHistory} from 'history';
 import {syncHistoryWithStore} from 'react-router-redux';
-import {loadSettings} from './actions';
+import {loadSettings, cleanMessage} from './actions';
 import App from './components/app';
 import Welcome from './components/welcome';
 import Campaign from './components/campaign';
@@ -24,9 +24,9 @@ const history = syncHistoryWithStore(withScroll(appHistory), store);
 store.dispatch(loadSettings());
 
 ReactDOM.render(
-  <Provider store={store} >
-    <Router history={history} >
-      <Route path="/" component={App} >
+  <Provider store={store}>
+    <Router history={history} onUpdate={() => store.dispatch(cleanMessage())}>
+      <Route path="/" component={App}>
         <Route path="settings" component={Settings} />
         <Route path="campaign" component={Campaign} />
         <IndexRoute component={Welcome} />

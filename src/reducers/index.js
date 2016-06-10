@@ -4,13 +4,15 @@ import {routerReducer as routing} from 'react-router-redux';
 import settings from './settings';
 import message from './message';
 import lists from './lists';
+import isSending from './isSending';
 
 const rootReducer = combineReducers({
   routing,
   form,
   settings,
   message,
-  lists
+  lists,
+  isSending
 });
 
 export default rootReducer;

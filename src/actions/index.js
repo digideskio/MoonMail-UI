@@ -76,14 +76,23 @@ export const sendCampaign = ({subject, body, listIds}) => {
     if (!baseUrl) {
       return noSettingsError(dispatch);
     }
+    dispatch({
+      type: types.SEND_CAMPAIGN_REQUEST
+    });
     return axios.post(`${baseUrl}/campaigns/test`, data)
       .then(() => {
+        dispatch({
+          type: types.SEND_CAMPAIGN_SUCCESS
+        });
         dispatch(showMessage({
           text: 'Campaign have been sent!',
           style: 'success'
         }));
       })
       .catch((err) => {
+        dispatch({
+          type: types.SEND_CAMPAIGN_FAIL
+        });
         dispatch(showMessage({
           text: err,
           style: 'error'

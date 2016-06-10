@@ -5,7 +5,7 @@ import Message from './shared/message';
 const App = ({children}) => (
   <div>
     <Header />
-    <section className="ui main text container" >
+    <section className="ui main text container">
       <Message />
       {children}
     </section>

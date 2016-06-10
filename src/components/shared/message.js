@@ -6,7 +6,7 @@ import * as actions from './../../actions';
 let Message = ({text, style, cleanMessage}) => {
   if (!text) return null;
   return (
-    <div className={cx('ui small message', style)} >
+    <div className={cx('ui small message', style)}>
       {text} <i className="close icon" onClick={() => cleanMessage()} />
     </div>
   );
