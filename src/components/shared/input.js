@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import cx from 'classnames';
 
 const Input = (props) => {
@@ -11,6 +11,15 @@ const Input = (props) => {
     </div>
 
   );
+};
+
+Input.propTypes = {
+  name: PropTypes.string.isRequired,
+  component: PropTypes.string,
+  label: PropTypes.string,
+  error: PropTypes.array,
+  touched: PropTypes.bool,
+  invalid: PropTypes.bool
 };
 
 export default Input;

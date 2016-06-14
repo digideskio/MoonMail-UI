@@ -11,7 +11,11 @@ class CampaignView extends Component {
     sendCampaign: PropTypes.func.isRequired,
     fetchLists: PropTypes.func.isRequired,
     lists: PropTypes.array.isRequired,
-    isSending: PropTypes.bool.isRequired
+    isSending: PropTypes.bool.isRequired,
+    invalid: PropTypes.bool.isRequired,
+    resetForm: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    fields: PropTypes.array.isRequired
   };
 
   reset = () => {
@@ -20,7 +24,6 @@ class CampaignView extends Component {
 
   submit = (formProps) => {
     this.props.sendCampaign(formProps).then(this.reset, this.reset);
-
   };
 
   componentWillMount() {

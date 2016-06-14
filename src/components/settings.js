@@ -1,9 +1,17 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
 import * as actions from './../actions';
 import Input from './shared/input';
 
 class SettingsView extends Component {
+
+  static propTypes = {
+    saveSettings: PropTypes.func.isRequired,
+    showMessage: PropTypes.func.isRequired,
+    invalid: PropTypes.bool.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    fields: PropTypes.array.isRequired
+  };
 
   submit = (formProps) => {
     this.props.saveSettings(formProps);
