@@ -1,7 +1,6 @@
 import webpack from 'webpack';
 import precss from 'precss';
 import autoprefixer from 'autoprefixer';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 export default function(options) {
   const webpackConfig = {
@@ -12,16 +11,9 @@ export default function(options) {
     output: {
       path: './public',
       publicPath: '/',
-      filename: 'bundle.[hash].js'
+      filename: 'bundle.js'
     },
-    plugins: [
-      new HtmlWebpackPlugin({
-        template: './src/index.html',
-        favicon: './src/static/favicon.png',
-        filename: 'index.html',
-        inject: 'body'
-      })
-    ],
+    plugins: [],
     module: {
       loaders: [{
         exclude: /node_modules/,
