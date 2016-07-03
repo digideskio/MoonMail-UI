@@ -1,9 +1,9 @@
-import * as types from './../actions/types';
+import * as types from 'actions/types';
 
 function messageReducer(state = {}, action) {
   switch (action.type) {
     case types.SHOW_MESSAGE:
-      return action.payload;
+      return action.message;
     case types.CLEAN_MESSAGE:
       return {};
     default:

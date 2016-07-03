@@ -7,7 +7,7 @@ export const saveSettings = (settings) => {
   storage.set('settings', settings);
   return {
     type: types.SAVE_SETTINGS,
-    payload: settings
+    settings
   };
 };
 
@@ -15,18 +15,18 @@ export const loadSettings = () => {
   const settings = storage.get('settings') || {};
   return {
     type: types.LOAD_SETTINGS,
-    payload: settings
+    settings
   };
 };
 
 export const showMessage = ({text, style, delay = 3000}) => {
-  return function(dispatch) {
+  return dispatch => {
     setTimeout(() => {
       dispatch(cleanMessage());
     }, delay);
     dispatch({
       type: types.SHOW_MESSAGE,
-      payload: {text, style}
+      message: {text, style}
     });
   };
 };
@@ -46,7 +46,7 @@ function noSettingsError(dispatch) {
 
 export const fetchLists = () => {
   const {baseUrl} = storage.get('settings') || {};
-  return function(dispatch) {
+  return dispatch => {
     if (!baseUrl) {
       return noSettingsError(dispatch);
     }
@@ -54,7 +54,7 @@ export const fetchLists = () => {
       .then((res) => {
         dispatch({
           type: types.FETCH_LISTS,
-          payload: res.data.items
+          items: res.data.items
         });
       })
       .catch((err) => {
@@ -72,7 +72,7 @@ export const sendCampaign = ({subject, body, listIds}) => {
     campaign: {id: cuid(), subject, body, listIds, precompiled: false},
     sender: {apiKey, apiSecret, region, emailAddress}
   };
-  return function(dispatch) {
+  return dispatch => {
     if (!baseUrl) {
       return noSettingsError(dispatch);
     }

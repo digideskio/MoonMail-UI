@@ -1,61 +1,83 @@
 import webpack from 'webpack';
 import precss from 'precss';
 import autoprefixer from 'autoprefixer';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-const env = process.env.NODE_ENV || 'development';
-
-const webpackConfig = {
-  entry: [
-    './src/index.js'
-  ],
-  output: {
-    path: './public',
-    publicPath: '/',
-    filename: 'bundle.js'
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(env)
-    })
-  ],
-  module: {
-    loaders: [{
-      exclude: /node_modules/,
-      loader: 'babel'
-    }, {
-      test: /\.css$/,
-      loader: 'style-loader!css-loader!postcss-loader'
-    }]
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  },
-  postcss() {
-    return [precss, autoprefixer];
-  }
-};
-
-if (env === 'development') {
-  webpackConfig.devtool = 'source-map';
-  webpackConfig.devServer = {
-    historyApiFallback: true,
-    inline: true,
-    contentBase: 'public'
+export default function(options) {
+  const webpackConfig = {
+    entry: [
+      './src/index.js'
+    ],
+    output: {
+      path: './public',
+      publicPath: '/',
+      filename: 'bundle.js'
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: './src/index.html',
+        hash: false,
+        favicon: './src/static/favicon.png',
+        filename: 'index.html',
+        inject: 'body',
+        minify: {
+          collapseWhitespace: true
+        }
+      })
+    ],
+    module: {
+      loaders: [{
+        exclude: /node_modules/,
+        loader: 'babel'
+      }, {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader!postcss-loader'
+      }, {
+        test: /\.json$/,
+        loader: 'json'
+      }, {
+        test: /\.html$/,
+        loader: 'html'
+      }]
+    },
+    resolve: {
+      modules: ['./src', 'node_modules'],
+      extensions: ['', '.js', '.jsx', '.json']
+    },
+    postcss() {
+      return [precss, autoprefixer];
+    }
   };
-}
 
-if (env === 'production') {
-  webpackConfig.plugins.push(
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        unused: true,
-        dead_code: true,
-        warnings: false
-      }
-    })
-  );
-}
+  if (options.dev) {
+    webpackConfig.devtool = 'source-map';
+    webpackConfig.devServer = {
+      historyApiFallback: true,
+      inline: true,
+      contentBase: 'public'
+    };
+  }
 
-export default webpackConfig;
+  if (options.prod) {
+    webpackConfig.plugins.push(
+      new webpack.LoaderOptionsPlugin({
+        minimize: true,
+        debug: false
+      }),
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': 'production'
+      }),
+      new webpack.optimize.OccurrenceOrderPlugin(),
+      new webpack.optimize.DedupePlugin(),
+      new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          unused: true,
+          dead_code: true,
+          warnings: false
+        }
+      })
+    );
+  }
+
+  return webpackConfig;
+}

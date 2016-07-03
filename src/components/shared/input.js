@@ -9,7 +9,6 @@ const Input = (props) => {
       <Component {...props} />
       {props.touched && props.invalid && <div className="ui basic red pointing prompt label">{props.error}</div>}
     </div>
-
   );
 };
 
@@ -17,7 +16,7 @@ Input.propTypes = {
   name: PropTypes.string.isRequired,
   component: PropTypes.string,
   label: PropTypes.string,
-  error: PropTypes.array,
+  error: PropTypes.string,
   touched: PropTypes.bool,
   invalid: PropTypes.bool
 };

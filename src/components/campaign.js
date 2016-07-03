@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
 import * as actions from './../actions';
-import Input from './shared/input';
-import Select from './shared/select';
+import Input from './shared/Input';
+import Select from './shared/Select';
 import cx from 'classnames';
 
 class CampaignView extends Component {
@@ -15,7 +15,7 @@ class CampaignView extends Component {
     invalid: PropTypes.bool.isRequired,
     resetForm: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-    fields: PropTypes.array.isRequired
+    fields: PropTypes.object.isRequired
   };
 
   reset = () => {
@@ -59,19 +59,7 @@ const mapStateToProps = (state) => ({
   isSending: state.isSending
 });
 
-const validate = (values) => {
-  const errors = {};
-  Object.keys(values).forEach((key) => {
-    const val = values[key];
-    if (!val || val.length === 0) errors[key] = 'this field is required';
-  });
-  return errors;
-};
-
-const Campaign = reduxForm({
+export default reduxForm({
   form: 'campaign',
-  fields: ['subject', 'listIds', 'body'],
-  validate
+  fields: ['subject', 'listIds', 'body']
 }, mapStateToProps, actions)(CampaignView);
-
-export default Campaign;

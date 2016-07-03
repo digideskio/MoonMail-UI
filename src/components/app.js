@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
-import Header from './shared/header';
-import Message from './shared/message';
+import Header from './shared/Header';
+import Message from './shared/Message';
 
 const App = ({children}) => (
   <div>
