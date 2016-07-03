@@ -3,6 +3,7 @@ import {reduxForm} from 'redux-form';
 import * as actions from './../actions';
 import Input from './shared/Input';
 import Select from './shared/Select';
+import SelectItem from './shared/SelectItem';
 import cx from 'classnames';
 
 class CampaignView extends Component {
@@ -38,7 +39,11 @@ class CampaignView extends Component {
         <form className="ui form" onSubmit={handleSubmit(this.submit)}>
           <Input type="text" {...subject} />
           <Select multiple label="Lists" {...listIds}>
-            {lists.map((list, i) => <option key={i} value={list.id}>{list.name}</option>)}
+            {lists.map((list, i) => (
+              <SelectItem key={i} value={list.id}>
+                {list.name}
+              </SelectItem>
+            ))}
           </Select>
           <Input component="textarea" {...body} />
           <button

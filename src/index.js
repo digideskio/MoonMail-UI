@@ -16,6 +16,7 @@ import Welcome from './components/Welcome';
 import Campaign from './components/Campaign';
 import Settings from './components/Settings';
 import reducers from './reducers';
+import {addInterceptors} from 'lib/api';
 
 const appHistory = withScroll(hashHistory);
 const store = createStore(reducers, {}, compose(
@@ -23,6 +24,8 @@ const store = createStore(reducers, {}, compose(
   window.devToolsExtension ? window.devToolsExtension() : f => f
 ));
 const history = syncHistoryWithStore(appHistory, store);
+
+// Load initial settings
 store.dispatch(loadSettings());
 
 ReactDOM.render(

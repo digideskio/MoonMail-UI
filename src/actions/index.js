@@ -1,7 +1,7 @@
 import storage from 'store';
-import axios from 'axios';
 import cuid from 'cuid';
 import * as types from './types';
+import apiClient from 'lib/api';
 
 export const saveSettings = (settings) => {
   storage.set('settings', settings);
@@ -35,68 +35,48 @@ export const cleanMessage = () => ({
   type: types.CLEAN_MESSAGE
 });
 
-function noSettingsError(dispatch) {
-  const error = 'Please provide all settings before sending a campaign';
-  dispatch(showMessage({
-    text: error,
-    style: 'error'
-  }));
-  return Promise.reject({error});
-}
-
 export const fetchLists = () => {
-  const {baseUrl} = storage.get('settings') || {};
-  return dispatch => {
-    if (!baseUrl) {
-      return noSettingsError(dispatch);
-    }
-    return axios.get(`${baseUrl}/lists`)
-      .then((res) => {
-        dispatch({
-          type: types.FETCH_LISTS,
-          items: res.data.items
-        });
-      })
-      .catch((err) => {
-        dispatch(showMessage({
-          text: err,
-          style: 'error'
-        }));
+  return async dispatch => {
+    try {
+      const lists = await apiClient.get('/lists');
+      dispatch({
+        type: types.FETCH_LISTS,
+        items: lists.items
       });
+    } catch (error) {
+      dispatch(showMessage({
+        text: error,
+        style: 'error'
+      }));
+    }
   };
 };
 
 export const sendCampaign = ({subject, body, listIds}) => {
-  const {baseUrl, apiKey, apiSecret, region, emailAddress} = storage.get('settings') || {};
   const data = {
-    campaign: {id: cuid(), subject, body, listIds, precompiled: false},
-    sender: {apiKey, apiSecret, region, emailAddress}
+    campaign: {id: cuid(), subject, body, listIds}
   };
-  return dispatch => {
-    if (!baseUrl) {
-      return noSettingsError(dispatch);
-    }
+  return async dispatch => {
     dispatch({
       type: types.SEND_CAMPAIGN_REQUEST
     });
-    return axios.post(`${baseUrl}/campaigns/test`, data)
-      .then(() => {
-        dispatch({
-          type: types.SEND_CAMPAIGN_SUCCESS
-        });
-        dispatch(showMessage({
-          text: 'Campaign have been sent!',
-          style: 'success'
-        }));
-      })
-      .catch((err) => {
-        dispatch({
-          type: types.SEND_CAMPAIGN_FAIL
-        });
-        dispatch(showMessage({
-          text: err,
-          style: 'error'
-        }));
+    try {
+      await apiClient.post('/campaigns/send', data);
+      dispatch({
+        type: types.SEND_CAMPAIGN_SUCCESS
       });
+      dispatch(showMessage({
+        text: 'Campaign have been sent!',
+        style: 'success'
+      }));
+    } catch (error) {
+      dispatch({
+        type: types.SEND_CAMPAIGN_FAIL
+      });
+      dispatch(showMessage({
+        text: error,
+        style: 'error'
+      }));
+    }
   };
 };

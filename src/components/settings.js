@@ -22,14 +22,13 @@ class SettingsView extends Component {
   };
 
   render() {
-    const {fields, handleSubmit, invalid} = this.props;
+    const {fields: {baseUrl, token}, handleSubmit, invalid} = this.props;
     return (
       <section>
         <h1 className="ui centered align header">Settings</h1>
         <form className="ui form" onSubmit={handleSubmit(this.submit)}>
-          {Object.keys(fields).map(key =>
-            <Input key={key} type="text" {...fields[key]} component={key === 'token' ? 'textarea' : 'input'}/>
-          )}
+          <Input {...baseUrl} />
+          <Input {...token} component="textarea" />
           <button className="ui button primary" type="submit" disabled={invalid}>Save</button>
         </form>
       </section>
@@ -52,6 +51,6 @@ const validate = (values) => {
 
 export default reduxForm({
   form: 'settings',
-  fields: ['baseUrl', 'emailAddress', 'apiKey', 'apiSecret', 'region', 'token'],
+  fields: ['baseUrl', 'token'],
   validate
 }, mapStateToProps, actions)(SettingsView);

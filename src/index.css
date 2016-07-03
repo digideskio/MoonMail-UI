@@ -10,7 +10,7 @@
   text-transform: capitalize;
 }
 
-.message.notification {
+.notification {
   position: absolute;
   margin: auto;
   z-index: 100;
@@ -18,4 +18,40 @@
   top: 80px;
   left: 10px;
   right: 10px;
+}
+
+.fade-enter {
+  opacity: 0.01;
+  transform: translateY(-20px);
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition-property: opacity, transform;
+  transition-duration: 200ms;
+}
+
+.fade-appear {
+  opacity: 0.01;
+  transform: translateY(-20px);
+}
+
+.fade-appear.fade-appear-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition-property: opacity, transform;
+  transition-duration: 200ms;
+}
+
+.fade-leave {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-leave.fade-leave-active {
+  opacity: 0.01;
+  transform: translateY(-20px);
+  transition-property: opacity, transform;
+  transition-duration: 200ms;
 }

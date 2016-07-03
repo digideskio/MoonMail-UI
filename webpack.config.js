@@ -6,6 +6,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 export default function(options) {
   const webpackConfig = {
     entry: [
+      'babel-polyfill',
       './src/index.js'
     ],
     output: {
@@ -43,6 +44,9 @@ export default function(options) {
     resolve: {
       modules: ['./src', 'node_modules'],
       extensions: ['', '.js', '.jsx', '.json']
+    },
+    externals: {
+      jquery: 'jQuery'
     },
     postcss() {
       return [precss, autoprefixer];
