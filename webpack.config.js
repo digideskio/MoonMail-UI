@@ -12,18 +12,14 @@ export default function(options) {
     output: {
       path: './public',
       publicPath: '/',
-      filename: 'bundle.js'
+      filename: 'bundle.[hash].js'
     },
     plugins: [
       new HtmlWebpackPlugin({
         template: './src/index.html',
-        hash: false,
         favicon: './src/static/favicon.png',
         filename: 'index.html',
-        inject: 'body',
-        minify: {
-          collapseWhitespace: true
-        }
+        inject: 'body'
       })
     ],
     module: {
