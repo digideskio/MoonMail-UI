@@ -1,0 +1,13 @@
+.wrapper {
+  position: absolute;
+  right: 15px;
+  left: 15px;
+  top: 85px;
+  max-width: 400px;
+  margin: auto;
+  z-index: 10000;
+}
+
+.message {
+  padding-right: 25px !important;
+}

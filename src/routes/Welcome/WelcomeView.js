@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Welcome = () => (
+const WelcomeView = () => (
   <article>
     <h1 className="ui header centered">
       Welcome to <a href="https://github.com/microapps/MoonMail" target="_blank">MoonMail</a> sample client
@@ -19,5 +19,4 @@ const Welcome = () => (
     </ul>
   </article>
 );
-
-export default Welcome;
+export default WelcomeView;

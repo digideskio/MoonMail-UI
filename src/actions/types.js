@@ -1,8 +1,6 @@
-export const SAVE_SETTINGS = 'save_settings';
-export const LOAD_SETTINGS = 'load_settings';
-export const SHOW_MESSAGE = 'show_message';
-export const CLEAN_MESSAGE = 'clean_message';
-export const FETCH_LISTS = 'fetch_lists';
-export const SEND_CAMPAIGN_REQUEST = 'send_campaign_request';
-export const SEND_CAMPAIGN_SUCCESS = 'send_campaign_success';
-export const SEND_CAMPAIGN_FAIL = 'send_campaign_fail';
+export const SAVE_SETTINGS = 'SAVE_SETTINGS';
+export const LOAD_SETTINGS = 'LOAD_SETTINGS';
+export const FETCH_LISTS = 'FETCH_LISTS';
+export const SEND_CAMPAIGN_REQUEST = 'SEND_CAMPAIGN_REQUEST';
+export const SEND_CAMPAIGN_SUCCESS = 'SEND_CAMPAIGN_SUCCESS';
+export const SEND_CAMPAIGN_FAIL = 'SEND_CAMPAIGN_FAIL';
