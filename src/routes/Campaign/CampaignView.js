@@ -13,7 +13,7 @@ const CampaignView = ({
   resetForm
 }) => {
   const submit = (formProps) => {
-    sendCampaign(formProps).then(resetForm);
+    sendCampaign(formProps);
   };
 
   return (

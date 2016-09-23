@@ -6,14 +6,13 @@ const apiClient = axios.create();
 
 apiClient.interceptors.request.use(config => {
   const settings = storage.get('settings') || {};
-  if (!settings.token) {
-    config.adapter = (resolve, reject) => reject('Please provide valid JWT token');
+  if (settings.token) {
+    config.headers['Authorization'] = `Bearer ${settings.token}`;
   }
   if (!settings.baseUrl) {
     config.adapter = (resolve, reject) => reject('Please provide api base url');
   }
   config.url = join(settings.baseUrl, config.url);
-  config.headers['Authorization'] = `Bearer ${settings.token}`;
   return config;
 }, error => {
   return Promise.reject(error.data);
@@ -25,5 +24,14 @@ apiClient.interceptors.response.use(response => {
   const errorMessage = (error.data && error.data.message) || error;
   return Promise.reject(errorMessage);
 });
+
+export const createCampaign = (campaign) =>
+  apiClient.post('campaigns', campaign);
+
+export const sendCampaign = (campaignId, campaign) =>
+  apiClient.post(`campaigns/${campaignId}/send`, campaign);
+
+export const fetchLists = (params = {}) =>
+  apiClient.get('lists', {params});
 
 export default apiClient;

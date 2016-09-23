@@ -4,10 +4,16 @@ import * as actions from 'actions';
 import CampaignView from './CampaignView';
 import Validator from 'validatorjs';
 
+Validator.register(
+  'emailBody',
+  value => value.includes('{{unsubscribe_url}}'),
+  'Please include {{unsubscribe_url}}'
+);
+
 const rules = {
   subject: 'required',
   listIds: 'required',
-  body: 'required'
+  body: 'required|emailBody'
 };
 
 const validate = values => {
@@ -39,5 +45,6 @@ const mapStateToProps = (state) => ({
 
 export default reduxForm({
   form: 'campaign',
-  fields: ['subject', 'listIds', 'body']
+  fields: ['subject', 'listIds', 'body'],
+  validate
 }, mapStateToProps, actions)(Campaign);

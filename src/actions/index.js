@@ -1,7 +1,6 @@
 import storage from 'store';
-import cuid from 'cuid';
 import * as types from './types';
-import apiClient from 'lib/api';
+import * as api from 'lib/api';
 import {addMessage} from 'modules/messages/actions';
 
 export const saveSettings = (settings) => {
@@ -29,7 +28,10 @@ export const loadSettings = () => {
 export const fetchLists = () => {
   return async dispatch => {
     try {
-      const lists = await apiClient.get('/lists');
+      const lists = await api.fetchLists({
+        limit: 1000,
+        fields: ['id', 'name', 'subscribedCount'].join(',')
+      });
       dispatch({
         type: types.FETCH_LISTS,
         items: lists.items
@@ -43,16 +45,42 @@ export const fetchLists = () => {
   };
 };
 
-export const sendCampaign = ({subject, body, listIds}) => {
-  const data = {
-    campaign: {id: cuid(), subject, body, listIds}
+export const createCampaign = ({subject, body, listIds}) => {
+  return async dispatch => {
+    dispatch({
+      type: types.CREATE_CAMPAIGN_REQUEST
+    });
+    try {
+      const campaign = await api.createCampaign({
+        name: subject,
+        subject,
+        body,
+        listIds
+      });
+      dispatch({
+        type: types.CREATE_CAMPAIGN_SUCCESS
+      });
+      return campaign.id;
+    } catch (error) {
+      dispatch({
+        type: types.CREATE_CAMPAIGN_FAIL
+      });
+      dispatch(addMessage({
+        text: error,
+        style: 'error'
+      }));
+    }
   };
+};
+
+export const sendCampaign = (campaign) => {
   return async dispatch => {
     dispatch({
       type: types.SEND_CAMPAIGN_REQUEST
     });
     try {
-      await apiClient.post('/campaigns/send', data);
+      const campaignId = await dispatch(createCampaign(campaign));
+      await api.sendCampaign(campaignId);
       dispatch({
         type: types.SEND_CAMPAIGN_SUCCESS
       });
