@@ -1,18 +1,16 @@
 import {combineReducers} from 'redux';
-import {reducer as form} from 'redux-form';
 import {routerReducer as routing} from 'react-router-redux';
+import {reducer as form} from 'redux-form';
+import messages from 'modules/messages/reducer';
 import settings from './settings';
-import message from './message';
 import lists from './lists';
 import isSending from './isSending';
 
-const rootReducer = combineReducers({
+export default combineReducers({
   routing,
+  messages,
   form,
   settings,
-  message,
   lists,
   isSending
 });
-
-export default rootReducer;

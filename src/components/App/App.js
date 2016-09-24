@@ -1,12 +1,12 @@
 import React, {PropTypes} from 'react';
-import Header from './shared/Header';
-import Message from './shared/Message';
+import Header from 'components/Header';
+import MessagesStack from 'components/MessagesStack'
 
 const App = ({children}) => (
   <div>
     <Header />
     <section className="ui main text container">
-      <Message />
+      <MessagesStack />
       {children}
     </section>
   </div>

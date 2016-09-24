@@ -1,23 +1,39 @@
 {
-  "parser"  : "babel-eslint",
-  "extends" : [
+  "parser": "babel-eslint",
+  "extends": [
     "standard",
     "standard-react"
   ],
-  "env"     : {
-    "browser" : true
+  "env": {
+    "browser": true
   },
   "plugins": [
     "babel"
   ],
-  "globals" : {
-    "$": true
+  "globals": {
+    "__COVERAGE__": true,
+    "__DEV__": true,
+    "__PROD__": true,
+    "__TEST__": true
   },
   "rules": {
-    "semi" : [2, "always"],
-    "max-len": [2, 120, 2],
-    "space-before-function-paren": ["error", "never"],
-    "jsx-quotes": ["error", "prefer-double"],
+    "semi": [
+      2,
+      "always"
+    ],
+    "max-len": [
+      2,
+      120,
+      2
+    ],
+    "space-before-function-paren": [
+      "error",
+      "never"
+    ],
+    "jsx-quotes": [
+      "error",
+      "prefer-double"
+    ],
     "react/jsx-no-bind": 0,
     "generator-star-spacing": 0,
     "babel/generator-star-spacing": 1,
