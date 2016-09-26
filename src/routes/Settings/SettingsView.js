@@ -18,33 +18,31 @@ const SettingsView = ({
   saveSettings
 }) => (
   <section>
-    <h1 className="ui centered align header">Settings</h1>
-    <div className="ui two column centered grid">
-      <div className="column">
-        <form className="ui form" onSubmit={handleSubmit(saveSettings)}>
-          <Input
-            {...baseUrl}
-            placeholder="https://api.moonmail.io"
-            hint="url of your API Gateway without trailing slash"
-            label="Base url" />
-          <Input {...emailAddress} hint="of your verified SES sender" />
-          <Input {...apiKey} />
-          <Input {...apiSecret} />
-          <Select {...region}>
-            {SES_REGIONS.map(({value, name}, i) => (
-              <SelectItem key={i} value={value}>{name}</SelectItem>
-            ))}
-          </Select>
-          <Input
-            {...token}
-            hint="if you are using JSON Web Tokens in your api as we do"
-            label="JWT Token"
-            component="textarea" />
-          <Button primary type="submit" disabled={invalid}>
-            Save
-          </Button>
-        </form>
-      </div>
+    <div className="ui text container">
+      <h1 className="ui centered align header">Settings</h1>
+      <form className="ui form" onSubmit={handleSubmit(saveSettings)}>
+        <Input
+          {...baseUrl}
+          placeholder="https://api.moonmail.io"
+          hint="url of your API Gateway without trailing slash"
+          label="Base url" />
+        <Input {...emailAddress} hint="of your verified SES sender" />
+        <Input {...apiKey} />
+        <Input {...apiSecret} />
+        <Select {...region}>
+          {SES_REGIONS.map(({value, name}, i) => (
+            <SelectItem key={i} value={value}>{name}</SelectItem>
+          ))}
+        </Select>
+        <Input
+          {...token}
+          hint="if you are using JSON Web Tokens in your api as we do"
+          label="JWT Token"
+          component="textarea" />
+        <Button primary type="submit" disabled={invalid}>
+          Save
+        </Button>
+      </form>
     </div>
   </section>
 );

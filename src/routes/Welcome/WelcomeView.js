@@ -1,7 +1,7 @@
 import React from 'react';
 
 const WelcomeView = () => (
-  <article>
+  <div className="ui text container">
     <h1 className="ui header centered">
       Welcome to <a href="https://github.com/microapps/MoonMail" target="_blank">MoonMail</a> sample client
     </h1>
@@ -17,6 +17,6 @@ const WelcomeView = () => (
       <li>You're using a SES endpoint that has production access (not sandbox mode)</li>
       <li>You've created an email list and some recipients through the API</li>
     </ul>
-  </article>
+  </div>
 );
 export default WelcomeView;
