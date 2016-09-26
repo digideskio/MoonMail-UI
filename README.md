@@ -1,13 +1,19 @@
-# Simple UI for MoonMail project
+# Simple UI for [MoonMail](https://github.com/microapps/MoonMail) project
 
-## Technological stack
+### With this client you'll have the ability to send an email campaign. We're assuming that:
+
+  -  You've set up the [Serverless](https://serverless.com/) project as described in the [documentation](https://github.com/microapps/MoonMail#getting-started)
+  - You're using a SES endpoint that has production access (not sandbox mode)
+  - You've created an email list and some recipients through the API
+
+### Technological stack
 
   - app architecture: `react`, `react-redux`, `react-router` `react-router-redux`, `redux-thunk`
   - styling: `sass`, `postcss`, `css-modules`
   - testing: `karma`, `chai`, `sinon`, `enzyme`
   - development and building: `webpack`, `babel`
 
-## Contributing
+### Contributing
 
 1. Fork it!
 2. Create your feature branch: `git checkout -b my-new-feature`
