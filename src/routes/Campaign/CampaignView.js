@@ -19,7 +19,7 @@ const CampaignView = ({
 
   return (
     <section>
-      <h1 className="ui centered align header">Campaign</h1>
+      <h1 className="ui centered align header">Send your campaign</h1>
       <form className="ui form" onSubmit={handleSubmit(submit)}>
         <Input type="text" {...subject} />
         <Select multiple label="Lists" {...listIds}>
