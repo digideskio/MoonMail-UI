@@ -25,8 +25,8 @@ apiClient.interceptors.response.use(response => {
   return Promise.reject(errorMessage);
 });
 
-export const sendCampaign = (campaignId, campaign) =>
-  apiClient.post(`campaigns/test`, campaign);
+export const sendCampaign = (canonicalMessage) =>
+  apiClient.post(`campaigns/test`, canonicalMessage);
 
 export const fetchLists = (params = {}) =>
   apiClient.get('lists', {params});

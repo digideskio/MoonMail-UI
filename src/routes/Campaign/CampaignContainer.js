@@ -27,7 +27,7 @@ class Campaign extends Component {
     fetchLists: PropTypes.func.isRequired
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchLists();
   }
 

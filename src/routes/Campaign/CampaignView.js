@@ -10,10 +10,11 @@ const CampaignView = ({
   invalid,
   lists,
   isSending,
-  sendCampaign
+  sendCampaign,
+  resetForm
 }) => {
   const submit = (formProps) => {
-    sendCampaign(formProps);
+    sendCampaign(formProps).then(resetForm);
   };
 
   return (

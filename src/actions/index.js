@@ -69,7 +69,7 @@ export const sendCampaign = (campaign) => {
         type: types.SEND_CAMPAIGN_SUCCESS
       });
       dispatch(addMessage({
-        text: 'Campaign have been sent!',
+        text: 'Campaign has been sent!',
         style: 'success'
       }));
     } catch (error) {

@@ -5,7 +5,7 @@ import MessagesStack from '../../components/MessagesStack'
 const App = ({children}) => (
   <div>
     <Header />
-    <section className="ui main text container">
+    <section className="ui main container">
       <MessagesStack />
       {children}
     </section>

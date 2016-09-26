@@ -24,6 +24,6 @@ const mapStateToProps = (state) => ({
 
 export default reduxForm({
   form: 'settings',
-  fields: ['baseUrl', 'emailAddress', 'fromName', 'apiKey', 'apiSecret', 'region', 'token'],
+  fields: ['baseUrl', 'emailAddress', 'apiKey', 'apiSecret', 'region', 'token'],
   validate
 }, mapStateToProps, actions)(SettingsView);
