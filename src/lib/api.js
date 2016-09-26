@@ -10,7 +10,7 @@ apiClient.interceptors.request.use(config => {
     config.headers['Authorization'] = `Bearer ${settings.token}`;
   }
   if (!settings.baseUrl) {
-    config.adapter = (resolve, reject) => reject('Please provide api base url');
+    config.adapter = (resolve, reject) => reject('Please provide all required settings');
   }
   config.url = join(settings.baseUrl, config.url);
   return config;
