@@ -1,4 +1,4 @@
-import 'styles/core.scss';
+import './styles/core.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import thunk from 'redux-thunk';
@@ -8,7 +8,7 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import {Router, useRouterHistory} from 'react-router';
 import createHashHistory from 'history/lib/createHashHistory';
 import {syncHistoryWithStore, routerMiddleware} from 'react-router-redux';
-import {loadSettings} from 'actions';
+import {loadSettings} from './actions';
 import reducers from './reducers';
 import routes from './routes';
 

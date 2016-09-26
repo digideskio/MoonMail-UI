@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import cx from 'classnames';
-import {stringToArray} from 'lib/utils';
+import {stringToArray} from '../../lib/utils';
 import humanize from 'humanize-string';
 
 class Select extends Component {

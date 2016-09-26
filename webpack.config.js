@@ -4,8 +4,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const cssModulesLoader = [
-  'css?',
-  'sourceMap&-minimize',
+  'css?sourceMap&-minimize',
   'modules',
   'importLoaders=1',
   'localIdentName=[name]__[local]__[hash:base64:5]'
@@ -68,13 +67,20 @@ export default function(options) {
       }, {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract({
+          disable: options.dev,
           fallbackLoader: 'style-loader',
           loader: [cssModulesLoader, 'postcss', 'sass?sourceMap']
+        })
+      }, {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: ['css-loader', 'postcss']
         })
       }]
     },
     resolve: {
-      modules: ['./src', 'node_modules'],
+      modules: ['node_modules'],
       extensions: ['', '.js', '.jsx', '.json'],
       alias: {}
     },
@@ -161,7 +167,7 @@ export default function(options) {
   }
 
   if (options.deploy) {
-    webpackConfig.output.publicPath = '/biomorphs/';
+    webpackConfig.output.publicPath = '/MoonMail-UI/';
   }
 
   return webpackConfig;

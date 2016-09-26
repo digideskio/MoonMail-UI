@@ -1,7 +1,8 @@
 import React, {Component, PropTypes} from 'react';
-import Input from 'components/Input';
-import Select, {SelectItem} from 'components/Select';
-import Button from 'components/Button';
+import Input from '../../components/Input';
+import Select, {SelectItem} from '../../components/Select';
+import Button from '../../components/Button';
+import CodeEditor from '../../components/CodeEditor';
 
 const CampaignView = ({
   fields: {subject, listIds, body},
@@ -9,8 +10,7 @@ const CampaignView = ({
   invalid,
   lists,
   isSending,
-  sendCampaign,
-  resetForm
+  sendCampaign
 }) => {
   const submit = (formProps) => {
     sendCampaign(formProps);
@@ -28,7 +28,10 @@ const CampaignView = ({
             </SelectItem>
           ))}
         </Select>
-        <Input component="textarea" {...body} />
+        <CodeEditor
+          {...body}
+          hint="you need to include {{unsubscribe_url}} tag"
+          label="Email body (paste html or drag your html file here)"/>
         <Button
           loading={isSending}
           positive

@@ -1,7 +1,7 @@
 import storage from 'store';
 import * as types from './types';
-import * as api from 'lib/api';
-import {addMessage} from 'modules/messages/actions';
+import * as api from '../lib/api';
+import {addMessage} from '../modules/messages/actions';
 
 export const saveSettings = (settings) => {
   storage.set('settings', settings);

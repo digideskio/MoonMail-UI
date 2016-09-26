@@ -1,10 +1,10 @@
 import {reduxForm} from 'redux-form';
-import * as actions from 'actions';
+import * as actions from '../../actions';
 import Validator from 'validatorjs';
 import SettingsView from './SettingsView';
 
 const rules = {
-  baseUrl: 'required'
+  baseUrl: 'required|url'
 };
 
 const validate = values => {

@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
-import Input from 'components/Input';
-import Button from 'components/Button';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 
 const SettingsView = ({
   fields: {baseUrl, token},
@@ -11,8 +11,16 @@ const SettingsView = ({
   <section>
     <h1 className="ui centered align header">Settings</h1>
     <form className="ui form" onSubmit={handleSubmit(saveSettings)}>
-      <Input {...baseUrl} />
-      <Input {...token} component="textarea" />
+      <Input
+        {...baseUrl}
+        placeholder="https://api.moonmail.io"
+        hint="url of your API Gateway without trailing slash"
+        label="Base url"/>
+      <Input
+        {...token}
+        hint="if you are using JSON Web Tokens in your api as we do"
+        label="JWT Token"
+        component="textarea" />
       <Button primary type="submit" disabled={invalid}>
         Save
       </Button>

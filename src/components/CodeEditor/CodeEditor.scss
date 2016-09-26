@@ -1,0 +1,25 @@
+.editor {
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(34,36,38,.15);
+  color: rgba(0,0,0,.87);
+  border-radius: .28571429rem;
+  box-shadow: 0 0 0 0 transparent inset;
+}
+
+:global {
+  .CodeMirror {
+    min-height: 450px;
+  }
+  .CodeMirror-dialog input {
+    padding: 3px 5px !important;
+  }
+  .field.error .ReactCodeMirror {
+    border-color: #e0b4b4;
+    color: #9f3a38;
+    box-shadow: none;
+    .CodeMirror {
+      background: #fff6f6;
+    }
+  }
+}

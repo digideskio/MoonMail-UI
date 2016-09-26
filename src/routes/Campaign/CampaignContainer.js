@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
-import * as actions from 'actions';
+import * as actions from '../../actions';
 import CampaignView from './CampaignView';
 import Validator from 'validatorjs';
 
