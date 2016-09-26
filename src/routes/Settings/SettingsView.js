@@ -1,9 +1,19 @@
 import React, {Component, PropTypes} from 'react';
 import Input from '../../components/Input';
+import Select, {SelectItem} from '../../components/Select';
 import Button from '../../components/Button';
+import {SES_REGIONS} from '../../lib/constants';
 
 const SettingsView = ({
-  fields: {baseUrl, token},
+  fields: {
+    baseUrl,
+    emailAddress,
+    fromName,
+    apiKey,
+    apiSecret,
+    region,
+    token
+  },
   handleSubmit,
   invalid,
   saveSettings
@@ -16,6 +26,15 @@ const SettingsView = ({
         placeholder="https://api.moonmail.io"
         hint="url of your API Gateway without trailing slash"
         label="Base url"/>
+      <Input {...emailAddress} hint="of your verified SES sender"/>
+      <Input {...fromName} hint="it will be shown in campaign from field"/>
+      <Input {...apiKey}/>
+      <Input {...apiSecret}/>
+      <Select {...region}>
+        {SES_REGIONS.map(({value, name}, i) => (
+          <SelectItem key={i} value={value}>{name}</SelectItem>
+        ))}
+      </Select>
       <Input
         {...token}
         hint="if you are using JSON Web Tokens in your api as we do"

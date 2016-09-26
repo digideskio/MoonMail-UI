@@ -19,3 +19,7 @@ export const omitProps = (object, ...props) => {
   props.forEach(p => delete no[p]);
   return no;
 };
+
+export const isEmpty = (object = {}) => (
+  object.constructor === Object && Object.keys(object).length === 0
+);

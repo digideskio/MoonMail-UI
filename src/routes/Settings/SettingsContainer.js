@@ -4,7 +4,12 @@ import Validator from 'validatorjs';
 import SettingsView from './SettingsView';
 
 const rules = {
-  baseUrl: 'required|url'
+  baseUrl: 'required|url',
+  emailAddress: 'required|email',
+  fromName: 'required',
+  apiKey: 'required',
+  apiSecret: 'required',
+  region: 'required'
 };
 
 const validate = values => {
@@ -19,6 +24,6 @@ const mapStateToProps = (state) => ({
 
 export default reduxForm({
   form: 'settings',
-  fields: ['baseUrl', 'token'],
+  fields: ['baseUrl', 'emailAddress', 'fromName', 'apiKey', 'apiSecret', 'region', 'token'],
   validate
 }, mapStateToProps, actions)(SettingsView);

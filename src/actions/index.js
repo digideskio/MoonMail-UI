@@ -1,6 +1,8 @@
 import storage from 'store';
+import cuid from 'cuid';
 import * as types from './types';
 import * as api from '../lib/api';
+import {isEmpty, omitProps} from '../lib/utils'
 import {addMessage} from '../modules/messages/actions';
 
 export const saveSettings = (settings) => {
@@ -45,42 +47,24 @@ export const fetchLists = () => {
   };
 };
 
-export const createCampaign = ({subject, body, listIds}) => {
-  return async dispatch => {
-    dispatch({
-      type: types.CREATE_CAMPAIGN_REQUEST
-    });
-    try {
-      const campaign = await api.createCampaign({
-        name: subject,
-        subject,
-        body,
-        listIds
-      });
-      dispatch({
-        type: types.CREATE_CAMPAIGN_SUCCESS
-      });
-      return campaign.id;
-    } catch (error) {
-      dispatch({
-        type: types.CREATE_CAMPAIGN_FAIL
-      });
-      dispatch(addMessage({
-        text: error,
-        style: 'error'
-      }));
-    }
-  };
-};
 
 export const sendCampaign = (campaign) => {
   return async dispatch => {
+    const settings = storage.get('settings') || {};
+    if (isEmpty(settings)) {
+      return dispatch(addMessage({
+        text: 'Please specify all settings before sending a campaign',
+        style: 'error'
+      }));
+    }
     dispatch({
       type: types.SEND_CAMPAIGN_REQUEST
     });
     try {
-      const campaignId = await dispatch(createCampaign(campaign));
-      await api.sendCampaign(campaignId);
+      await api.sendCampaign({
+        campaign: {...campaign, id: cuid()},
+        sender: omitProps(settings, 'baseUrl', 'token')
+      });
       dispatch({
         type: types.SEND_CAMPAIGN_SUCCESS
       });
