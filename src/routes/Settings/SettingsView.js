@@ -27,8 +27,8 @@ const SettingsView = ({
           hint="url of your API Gateway without trailing slash"
           label="Base url" />
         <Input {...emailAddress} hint="of your verified SES sender" />
-        <Input {...apiKey} />
-        <Input {...apiSecret} />
+        <Input {...apiKey} label="Access Key ID" />
+        <Input {...apiSecret} label="Secret Access Key" />
         <Select {...region}>
           {SES_REGIONS.map(({value, name}, i) => (
             <SelectItem key={i} value={value}>{name}</SelectItem>
