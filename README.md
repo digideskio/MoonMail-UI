@@ -7,7 +7,7 @@
 [![Gitter](https://badges.gitter.im/microapps/MoonMail.svg)](https://gitter.im/microapps/MoonMail?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 
-Send email marketing campaigns with [Amazon SES](https://aws.amazon.com/ses/). Let [Amazon Lambda](https://aws.amazon.com/lambda/) compose email by email and literaly scale it to infinite.  Use this [React powered frontend](https://microapps.github.io/MoonMail-UI/)to shoot your email marketing campaigns with your AWS/SES credentials. We're assuming that:
+Send email marketing campaigns with [Amazon SES](https://aws.amazon.com/ses/). Let [Amazon Lambda](https://aws.amazon.com/lambda/) compose email by email and literaly scale it to infinite.  Use this [React powered frontend](https://microapps.github.io/MoonMail-UI/) to shoot your email marketing campaigns with your AWS/SES credentials. We're assuming that:
 
   -  You have set up the [Serverless](https://serverless.com/) project as described in the [documentation](https://github.com/microapps/MoonMail#getting-started)
   - You are using a SES endpoint that has production access (not sandbox mode)
