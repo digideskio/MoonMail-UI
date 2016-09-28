@@ -7,23 +7,31 @@
 [![Gitter](https://badges.gitter.im/microapps/MoonMail.svg)](https://gitter.im/microapps/MoonMail?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 
-Send email marketing campaigns with [Amazon SES](https://aws.amazon.com/ses/). Let [Amazon Lambda](https://aws.amazon.com/lambda/) compose email by email and literaly scale it to infinite.  With this client you'll have the ability to send an email campaign. We're assuming that:
+Send email marketing campaigns with [Amazon SES](https://aws.amazon.com/ses/). Let [Amazon Lambda](https://aws.amazon.com/lambda/) compose email by email and literaly scale it to infinite.  Use this React powered frontend to shoot your email marketing campaigns with your AWS/SES credentials. We're assuming that:
 
   -  You've set up the [Serverless](https://serverless.com/) project as described in the [documentation](https://github.com/microapps/MoonMail#getting-started)
   - You're using a SES endpoint that has production access (not sandbox mode)
   - You've created an email list and some recipients through the API
 
-## Technological stack
+## Contributing Guidelines
+Contributions are always welcome! If you'd like to collaborate with us, take into account that:
 
-  - app architecture: `react`, `react-redux`, `react-router` `react-router-redux`, `redux-thunk`
-  - styling: `sass`, `postcss`, `css-modules`
-  - testing: `karma`, `chai`, `sinon`, `enzyme`
-  - development and building: `webpack`, `babel`
+* We use [ES2015](https://babeljs.io/docs/learn-es2015/) and love OOP.
+* We test with [mocha](https://github.com/mochajs/mocha) + [chai](https://github.com/chaijs/chai) + [sinon](https://github.com/sinonjs/sinon).
 
-## Contributing
+Feel free to <a href="mailto:hi@microapps.com">contact us</a> if you have any question!
 
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
+
+## License
+
+MoonMail is available under the MIT license. See the LICENSE file for more info.
+
+## Professional Help
+
+If you need support getting MoonMail into production in your AWS account, contact the experts:
+
+- <a href="mailto:ryan@serverlesscode.com">ServerlessCode</a>
+- <a href="http://www.apiwise.nl">Apiwise</a>
+- <a href="https://sc5.io">SC5</a>
+- <a href="mailto:sam@acloud.guru">A Cloud Guru - AWS training & serverless experts</a> (<a href="https://acloud.guru">Visit Web Site</a>)
+- <a href="mailto:hello@goltfisch.de">Just Serverless</a>
