@@ -9,9 +9,9 @@
 
 Send email marketing campaigns with [Amazon SES](https://aws.amazon.com/ses/). Let [Amazon Lambda](https://aws.amazon.com/lambda/) compose email by email and literaly scale it to infinite.  Use this React powered frontend to shoot your email marketing campaigns with your AWS/SES credentials. We're assuming that:
 
-  -  You've set up the [Serverless](https://serverless.com/) project as described in the [documentation](https://github.com/microapps/MoonMail#getting-started)
-  - You're using a SES endpoint that has production access (not sandbox mode)
-  - You've created an email list and some recipients through the API
+  -  You have set up the [Serverless](https://serverless.com/) project as described in the [documentation](https://github.com/microapps/MoonMail#getting-started)
+  - You are using a SES endpoint that has production access (not sandbox mode)
+  - You have created a recipients list and added some recipients to it through the API
 
 ## Contributing Guidelines
 Contributions are always welcome! If you'd like to collaborate with us, take into account that:
